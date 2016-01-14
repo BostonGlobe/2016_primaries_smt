@@ -1,0 +1,6 @@
+<div id="bostonglobe-2016-01-14_2016-primaries-smt" style="margin: 20px 0;"></div>
+<script src="http://apps.bostonglobe.com/common/js/pym/pym-0.4.5.min.js"></script>
+<script>
+	var pymParent = new pym.Parent("bostonglobe-2016-01-14_2016-primaries-smt", "http://apps.bostonglobe.com/graphics/", {});
+
+</script>

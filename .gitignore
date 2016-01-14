@@ -1,0 +1,10 @@
+dist
+.tmp
+node_modules
+ssh-config.js
+2016-01-14_2016-primaries-smt_cache
+2016-01-14_2016-primaries-smt_files
+2016-01-14_2016-primaries-smt.html
+.Rhistory
+
+*.swp
