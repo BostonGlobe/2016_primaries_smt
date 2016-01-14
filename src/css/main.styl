@@ -1,10 +1,166 @@
-//=======================
-// Custom styles
-//=======================
 
-// To use images in assets folder:
-// ex: background-image url($assets-path + 'filename.jpg')
+$votes-width = 7rem
+$photo-width = 4rem
+$vertical-offset = 0.5rem
 
-// See `base` folder for variables (color, font, media queries)
+$small = 16rem
+$medium = 18rem
+$large = 22rem
 
+.results-container
+	position relative
 
+.updater
+	position absolute
+	right 0
+	line-height 1
+	span
+		color #777
+		font-family $sans
+
+.state-results-small-table
+
+	.title-and-updater
+		width 100%
+		overflow hidden
+
+		&.dem
+			.title span
+				color $dem
+
+		&.gop
+			.title span
+				color $gop
+
+		.title
+			float left
+			width 50%
+			text-align left
+			line-height 1
+			span
+				font-family $sans
+				text-transform uppercase
+
+	.precincts-and-more
+		width 100%
+		overflow hidden
+
+		.precincts
+			float left
+			span
+				font-family $sans
+
+		.more
+			float right
+			a
+				text-decoration underline
+				font-family $sans
+				.extra
+					display none
+					@media screen and (min-width: $small)
+						display inline
+
+	.results
+
+		&.dem
+			.bar span
+				background $dem
+
+		&.gop
+			.bar span
+				background $gop
+
+		.candidate-row
+			border-bottom solid #ddd 1px
+			width 100%
+			overflow hidden
+
+		.candidate-row.fancy
+			margin-top 0.5rem
+
+			.photo
+				display none
+				@media screen and (min-width: $medium)
+					float left
+					display block
+					img
+						width $photo-width
+						vertical-align bottom
+
+			.two-rows
+				@media screen and (min-width: $medium)
+					padding-left $photo-width + 1
+					position relative
+					top $vertical-offset
+
+				.name-and-pct
+					width 100%
+					overflow hidden
+
+					.name
+						float left
+						span
+							font-family $benton
+						.first
+							display none
+							@media screen and (min-width: $large)
+								display inline
+
+					.pct
+						float right
+						span
+							font-family $benton
+
+				.bar-and-votes
+					width 100%
+					overflow hidden
+					position relative
+					@media screen and (min-width: $medium)
+						margin-top -1*$vertical-offset
+
+					.bar
+						float left
+						width 100%
+						text-align left
+						padding-right $votes-width
+						span
+							display inline-block
+							&.wrapper
+								width 100%
+								background #eee
+								line-height 0.75
+
+					.votes
+						position absolute
+						right 0
+						span
+							font-family $sans
+							color #777
+
+		.candidate-row.lite
+
+			.name-and-votes-and-pct
+				width 100%
+				overflow hidden
+				text-align left
+				position relative
+
+				.first.name
+					display none
+					@media screen and (min-width: $large)
+						display inline
+				.name
+					font-family $sans
+
+				.votes
+					display none
+					font-family $sans
+					color #777
+					@media screen and (min-width: $medium)
+						display inline
+
+				.pct
+					position absolute
+					right 0
+					display inline-block
+					font-family $benton

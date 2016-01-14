@@ -9,7 +9,7 @@ var config = {
 		loaders: [
 			{ test: /\.csv?$/, loader: 'dsv-loader' },
 			{ test: /\.json$/, loader: 'json-loader' },
-			{ test: /\.js$/,   loader: 'babel', exclude: /node_modules/ }
+			{ test: /\.js$/,   loader: 'babel-loader', exclude: /node_modules/ }
 		]
 	}
 };
@@ -29,6 +29,7 @@ gulp.task('js-prod', function() {
 
 	config.plugins = [
 		new webpack.optimize.UglifyJsPlugin(),
+		new webpack.optimize.OccurenceOrderPlugin(),
 		new webpack.optimize.DedupePlugin()
 	];
 
