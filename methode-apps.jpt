@@ -1,6 +1,5 @@
-<div id="bostonglobe-2016-01-14_2016-primaries-smt" style="margin: 20px 0;"></div>
+<div id="bgsmalltable_caucuses-democratic-iowa" style="margin: 20px 0;"></div>
 <script src="http://apps.bostonglobe.com/common/js/pym/pym-0.4.5.min.js"></script>
 <script>
-	var pymParent = new pym.Parent("bostonglobe-2016-01-14_2016-primaries-smt", "http://apps.bostonglobe.com/graphics/", {});
-
+	var pymParent = new pym.Parent("bgsmalltable_caucuses-democratic-iowa", "http://apps.bostonglobe.com/graphics/2016/02/state-results-small-table?raceType=caucuses&party=democratic&state=iowa", {});
 </script>

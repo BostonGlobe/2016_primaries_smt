@@ -1,6 +1,8 @@
 import globeIframe from 'globe-iframe-resizer';
 import { stateResultsSmallTable, Standardize } from 'election-components';
 import PeriodicJS from './periodic';
+import { parse } from 'query-string';
+import { titleize } from 'underscore.string';
 
 // This fires when the parent of iframe resizes
 function onPymParentResize(width) {};
@@ -8,27 +10,22 @@ globeIframe(onPymParentResize);
 
 function getURL(opts) {
 
-	const baseUrl = 'http://localhost:3010/';
+	const base = {
+		local: 'http://localhost:3010/',
+		dev: 'http://dev.apps.bostonglobe.com/graphics/2016/02/state-results-small-table/assets/data/'
+	};
 
-	const parts = getPathnameParts();
+	const baseUrl = location.hostname === 'localhost' ? base.local : base.dev;
 
-	const stateAbbr = Standardize.collapse.state(parts.state);
-	const partyAbbr = Standardize.collapse.party(parts.party);
-	const raceType = Standardize.raceType(parts.raceType, true);
+	const { state, party, raceType } = parse(location.search);
 
-	return `${baseUrl}${stateAbbr}-${partyAbbr}-${raceType}.json`;
+	const stateAbbr = Standardize.collapse.state(state);
+	const partyAbbr = Standardize.collapse.party(party);
+	const raceTypeName = Standardize.raceType(raceType, true);
 
-}
-
-function getPathnameParts() {
-
-	const h1 = document.querySelector('h1');
-	const parts = h1.innerHTML.split(' ');
-	const raceType = parts.pop();
-	const party = parts.pop();
-	const state = parts.join(' ');
-	return {state, party, raceType};
-
+	const fullUrl = `${baseUrl}${stateAbbr}-${partyAbbr}-${raceTypeName}.json`.toLowerCase();
+	console.log(fullUrl);
+	return fullUrl;
 }
 
 // set up polling

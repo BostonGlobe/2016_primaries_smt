@@ -49,6 +49,10 @@ $large = 22rem
 			float left
 			span
 				font-family $sans
+				&.extra
+					display none
+					@media screen and (min-width: $small)
+						display inline
 
 		.more
 			float right

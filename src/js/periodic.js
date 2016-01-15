@@ -16,7 +16,7 @@ export default function PeriodicJS(opts) {
 
 		// don't update dom element with same string
 		if (formattedTime.toString() !== currentDisplayedTime) {
-			element.innerHTML = 'update in ' + formattedTime;
+			element.innerHTML = 'Update in ' + formattedTime;
 		}
 
 	}
@@ -34,7 +34,6 @@ export default function PeriodicJS(opts) {
 
 				// call user-provided callback, and pass along run,
 				// so they can resume the timer, if so desired
-				console.log('calling callback again');
 				callback(run);
 			}
 
@@ -43,7 +42,6 @@ export default function PeriodicJS(opts) {
 	}
 
 	if (runImmediately) {
-		console.log('calling callback for first time');
 		callback(run);
 	} else {
 		run();
