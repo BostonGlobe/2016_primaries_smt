@@ -2,7 +2,6 @@ import globeIframe from 'globe-iframe-resizer';
 import { stateResultsSmallTable, Standardize } from 'election-components';
 import PeriodicJS from 'periodic.js';
 import { parse } from 'query-string';
-import { titleize } from 'underscore.string';
 
 // This fires when the parent of iframe resizes
 function onPymParentResize(width) {};
@@ -19,12 +18,11 @@ function getURL(opts) {
 
 	const { state, party, raceType } = parse(location.search);
 
-	const stateAbbr = Standardize.collapse.state(state);
-	const partyAbbr = Standardize.collapse.party(party);
+	const stateAbbr    = Standardize.collapse.state(state);
+	const partyAbbr    = Standardize.collapse.party(party);
 	const raceTypeName = Standardize.raceType(raceType, true);
 
 	const fullUrl = `${baseUrl}${stateAbbr}-${partyAbbr}-${raceTypeName}.json`.toLowerCase();
-	console.log(fullUrl);
 	return fullUrl;
 }
 
