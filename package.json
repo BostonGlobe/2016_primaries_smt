@@ -28,7 +28,7 @@
     "gulp-zip": "^3.0.2",
     "imports-loader": "^0.6.5",
     "json-loader": "^0.5.4",
-    "periodic.js": "^1.0.5",
+    "periodic.js": "^1.0.6",
     "query-string": "^3.0.0",
     "request": "^2.67.0",
     "require-dir": "^0.3.0",

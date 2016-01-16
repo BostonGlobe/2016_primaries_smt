@@ -1,6 +1,6 @@
 import globeIframe from 'globe-iframe-resizer';
 import { stateResultsSmallTable, Standardize } from 'election-components';
-import PeriodicJS from './periodic';
+import PeriodicJS from 'periodic.js';
 import { parse } from 'query-string';
 import { titleize } from 'underscore.string';
 
