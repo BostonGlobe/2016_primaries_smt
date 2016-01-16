@@ -35,6 +35,30 @@ PeriodicJS({
 	runImmediately: true
 });
 
+// from http://youmightnotneedjquery.com/
+function getJSON(url, callback) {
+
+	var request = new XMLHttpRequest();
+	request.open('GET', url, true);
+
+	request.onload = function() {
+		if (request.status >= 200 && request.status < 400) {
+			// Success!
+			var data = JSON.parse(request.responseText);
+			callback(data);
+		} else {
+			// We reached our target server, but it returned an error
+
+		}
+	};
+
+	request.onerror = function() {
+		// There was a connection error of some sort
+	};
+
+	request.send();
+}
+
 function fetchData(done) {
 
 	// tell user we are fetching data
@@ -43,26 +67,23 @@ function fetchData(done) {
 
 	const url = getURL();
 
-	// fetch data
-	fetch(url)
-		.then(response => response.json())
-		.then(json => {
+	getJSON(url, function(json) {
 
-			// update html components
-			document.querySelector('.state-results-small-table').innerHTML = stateResultsSmallTable(json);
+		// update html components
+		document.querySelector('.state-results-small-table').innerHTML = stateResultsSmallTable(json);
 
-			// if we have less than 100% precincts reporting, continue
+		// if we have less than 100% precincts reporting, continue
 
-			// get state-level reporting unit
-			const stateRU = json.reportingUnits.filter(x => x.level === 'state')[0];
+		// get state-level reporting unit
+		const stateRU = json.reportingUnits.filter(x => x.level === 'state')[0];
 
-			if (stateRU.precinctsReportingPct < 100) {
-				done();
-			} else {
-				element.innerHTML = '';
-			}
+		if (stateRU.precinctsReportingPct < 100) {
+			done();
+		} else {
+			element.innerHTML = '';
+		}
 
-		});
+	});
 
 }
 
