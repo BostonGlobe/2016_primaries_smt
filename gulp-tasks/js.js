@@ -1,40 +1,58 @@
 var gulp          = require('gulp');
-var rename        = require('gulp-rename');
 var browserSync   = require('browser-sync');
-var webpackStream = require('webpack-stream');
-var webpack       = require('webpack');
+var rollup        = require('rollup');
+var babel         = require('rollup-plugin-babel');
+var npm           = require('rollup-plugin-npm');
+var commonjs      = require('rollup-plugin-commonjs');
+var uglify        = require('rollup-plugin-uglify');
 
-var config = {
-	module: {
-		loaders: [
-			{ test: /\.csv?$/, loader: 'dsv-loader' },
-			{ test: /\.json$/, loader: 'json-loader' },
-			{ test: /\.js$/,   loader: 'babel-loader', exclude: /node_modules/ }
-		]
-	}
-};
-
-gulp.task('js-dev', function() {
-
-	config.plugins = [];
-
-	return gulp.src('src/js/main.js')
-		.pipe(webpackStream(config))
-		.pipe(rename('bundle.js'))
-		.pipe(gulp.dest('dist/dev/js'))
-		.pipe(browserSync.reload({stream:true}));
+gulp.task('js-dev', function(done) {
+	bundleJS(false, function() {
+		done();
+	});
 });
 
-gulp.task('js-prod', function() {
+gulp.task('js-prod', function(done) {
+	bundleJS(true, function() {
+		done();
+	});
+});
 
-	config.plugins = [
-		new webpack.optimize.UglifyJsPlugin(),
-		new webpack.optimize.OccurenceOrderPlugin(),
-		new webpack.optimize.DedupePlugin()
+function bundleJS(isProd, done) {
+
+	var plugins = [
+		babel({
+			exclude: 'node_modules/**'
+		}),
+		npm({ jsnext: true, main: true }),
+		commonjs()
 	];
 
-	return gulp.src('src/js/main.js')
-		.pipe(webpackStream(config))
-		.pipe(rename('bundle.js'))
-		.pipe(gulp.dest('.tmp/js'));
-});
+	if (isProd) plugins.push(uglify());
+	var output = isProd ? '.tmp/js/bundle.js' : 'dist/dev/js/bundle.js';
+
+	rollup.rollup({
+		entry: 'src/js/main.js',
+		plugins: plugins
+	})
+	.catch(function(error) {
+		console.log(error);
+	})
+	.then(function(bundle) {
+		return bundle.write({
+			format: 'iife',
+			dest: output
+		});
+	})
+	.catch(function(error) {
+		console.log(error);
+	})
+	.then(function() {
+		if (!isProd) {
+			browserSync.reload(output);
+		}
+		done();
+	});
+
+}
+

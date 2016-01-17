@@ -1,3 +1,7 @@
+serve:
+
+	cd ./src/assets/data/; serve -p 3010 -C;
+
 R:
 
 	Rscript -e "rmarkdown::render('data/2016-01-14_2016-primaries-smt.Rmd')"
