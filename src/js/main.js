@@ -3,6 +3,7 @@ import { Standardize } from 'election-components';
 import stateResultsSmallTable from './state-results-small-table';
 import PeriodicJS from 'periodic.js';
 import { parse } from 'query-string';
+import getJSON from 'get-json-lite';
 
 // This fires when the parent of iframe resizes
 function onPymParentResize(width) {};
@@ -35,30 +36,6 @@ PeriodicJS({
 	callback: fetchData,
 	runImmediately: true
 });
-
-// from http://youmightnotneedjquery.com/
-function getJSON(url, callback) {
-
-	var request = new XMLHttpRequest();
-	request.open('GET', url, true);
-
-	request.onload = function() {
-		if (request.status >= 200 && request.status < 400) {
-			// Success!
-			var data = JSON.parse(request.responseText);
-			callback(data);
-		} else {
-			// We reached our target server, but it returned an error
-
-		}
-	};
-
-	request.onerror = function() {
-		// There was a connection error of some sort
-	};
-
-	request.send();
-}
 
 function fetchData(done) {
 
