@@ -12,7 +12,7 @@
 
 #### How to create a new table
 
-Create a new *.jpt* with the following content - e.g. Iowa Democratic caucuses:
+We're going to create a table for the Iowa Democratic caucuses. Create a new *.jpt* with the following content:
 
 ```html
 <!-- MODIFY THE ID FIELD IN THE FOLLOWING LINE -->
