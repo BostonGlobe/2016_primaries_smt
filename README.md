@@ -36,7 +36,7 @@ We're going to create a table for the Iowa Democratic caucuses. Create a new *.j
 
 **Note:** make sure that the id field is unique in the page. In other words, make sure there are no other elements with that id or the graphic won't work.
 
-Slot the jpt in your article or section front and you're done.
+Slot the *.jpt* in your article or section front and you're done.
 
 ## Developers
 
