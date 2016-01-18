@@ -1,12 +1,11 @@
 # 2016-primaries-smt
 
+This is a graphic that displays live state-wide primary results on election night.
+
 ![tables](https://cloud.githubusercontent.com/assets/370976/12398677/26b21142-bde3-11e5-81db-211142430e65.png)
 
-## Developers
-
-#### Setup
-
-- `npm i`
+- [How to create a new table](#how-to-create-a-new-table)
+- [Developer setup](#setup)
 
 ## Producers
 
@@ -38,3 +37,10 @@ We're going to create a table for the Iowa Democratic caucuses. Create a new *.j
 **Note:** make sure that the id field is unique in the page. In other words, make sure there are no other elements with that id or the graphic won't work.
 
 Slot the jpt in your article or section front and you're done.
+
+## Developers
+
+#### Setup
+
+- `npm i`
+
