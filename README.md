@@ -17,7 +17,7 @@ We're going to create a table for the Iowa Democratic caucuses. Create a new *.j
 <!-- MODIFY: the id field in the following line-->
 <div id='bg-primaries-smt-caucuses-democratic-iowa' style='margin: 20px 0;'></div>
 
-<script src='http://apps.bostonglobe.com/common/js/pym/pym-0.4.5.min.js'></script>
+<script src='https://apps.bostonglobe.com/common/js/pym/pym-0.4.5.min.js'></script>
 <script>
 
 	// MODIFY: these three variables
