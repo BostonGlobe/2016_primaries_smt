@@ -1,10 +1,18 @@
-# 2016-01-14_2016-primaries-smt
+# 2016-primaries-smt
 
-## Setup
+![tables](https://cloud.githubusercontent.com/assets/370976/12398677/26b21142-bde3-11e5-81db-211142430e65.png)
+
+## Developers
+
+### Setup
 
 - `npm i`
 
-## Location
+## Producers
 
-- on apps: `http://dev.apps.bostonglobe.com/graphics/2016/02/state-results-small-table/?raceType=caucuses&party=republican&state=iowa`
+### Usage
+
+### Location
+
+- on apps: `http://dev.apps.bostonglobe.com/graphics/2016/02/state-results-small-table/`
 - on methode: `/Boston/Content/Politics/WebGraphics/2016/02/primaryWidgets/stateResultsSmallTable.jpt`
