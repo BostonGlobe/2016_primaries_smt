@@ -4,15 +4,15 @@
 
 ## Developers
 
-### Setup
+#### Setup
 
 - `npm i`
 
 ## Producers
 
-### Usage
+#### Usage
 
-### Location
+#### Location
 
 - on apps: `http://dev.apps.bostonglobe.com/graphics/2016/02/state-results-small-table/`
 - on methode: `/Boston/Content/Politics/WebGraphics/2016/02/primaryWidgets/stateResultsSmallTable.jpt`
