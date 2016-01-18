@@ -1,5 +1,5 @@
 import addCommas from 'add-commas';
-import { Standardize } from 'election-components';
+import { Standardize } from 'election-utils';
 
 const NUMBER_TO_PRIORITIZE = 3;
 const MAX_NUMBER_TO_DISPLAY = 6;
