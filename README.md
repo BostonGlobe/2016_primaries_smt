@@ -1,6 +1,6 @@
 # 2016-primaries-smt
 
-This is a graphic that displays live state-wide primary results on election night. It works at various widths starting at 171px:
+This is a graphic that displays live state-wide primary results table on election night. It works at various widths starting at 171px:
 
 ![tables](https://cloud.githubusercontent.com/assets/370976/12398677/26b21142-bde3-11e5-81db-211142430e65.png)
 
