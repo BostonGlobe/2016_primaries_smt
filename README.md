@@ -12,20 +12,21 @@
 
 #### How to create a new table
 
-We're going to create a table for the Iowa Democratic caucuses. Create a new *.jpt* with the following content:
+We're going to create a table for the Iowa Democratic caucuses. Create a new *.jpt* with the following content, and modify accordingly.
 
 ```html
-<!-- MODIFY THE ID FIELD IN THE FOLLOWING LINE -->
+<!-- MODIFY: the id field in the following line-->
 <div id='bg-primaries-smt-caucuses-democratic-iowa' style='margin: 20px 0;'></div>
+
 <script src='http://apps.bostonglobe.com/common/js/pym/pym-0.4.5.min.js'></script>
 <script>
 
-	// MODIFY THESE THREE VARIABLES
+	// MODIFY: these three variables
 	var raceType  = 'caucuses';   // e.g. caucuses, primary
 	var party     = 'democratic'; // e.g. democratic, republican
 	var state     = 'iowa';       // e.g. new hampshire, alaska
 
-	// THIS MUST THE SAME AS THE ID ABOVE IN THE DIV
+	// MODIFY: make sure this is the same as the id field in the first line
 	var uniqueId  = 'bg-primaries-smt-caucuses-democratic-iowa';
 
 	var baseurl   = 'http://dev.apps.bostonglobe.com/graphics/2016/02/state-results-small-table';
@@ -34,6 +35,6 @@ We're going to create a table for the Iowa Democratic caucuses. Create a new *.j
 </script>
 ```
 
-*Note:* make sure that the id field is unique in the page. In other words, make sure there are no other elements with that id or the graphic won't work.
+**Note:** make sure that the id field is unique in the page. In other words, make sure there are no other elements with that id or the graphic won't work.
 
 Slot the jpt in your article or section front and you're done.
