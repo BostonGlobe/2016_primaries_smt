@@ -1,5 +1,6 @@
 import addCommas from 'add-commas';
 import { Standardize } from 'election-utils';
+import slugify from 'underscore.string/slugify';
 
 const NUMBER_TO_PRIORITIZE = 3;
 const MAX_NUMBER_TO_DISPLAY = 6;
@@ -55,12 +56,20 @@ export default function stateResultsSmallTable(results) {
 		.map(x => x.voteCount)
 		.reduce((x, y) => x + y);
 
-	const party = results.party.toLowerCase();
+	const partyAbbr = results.party;
+	const party = Standardize.expand.party(partyAbbr);
+
+	const stateAbbr = stateRU.statePostal;
+	const state = Standardize.expand.state(stateAbbr);
+
+	const raceType = Standardize.raceType(results.raceType);
+
+	const moreUrl = `https://dev.apps.bostonglobe.com/election-results/2016/${raceType.toLowerCase()}/${party.toLowerCase()}/${slugify(state).toLowerCase()}/`;
 
 	return `
 
 	<div class='title-and-updater ${party}'>
-		<div class='title'><span class='iota'>${Standardize.expand.party(results.party)} ${Standardize.raceType(results.raceType)}</span></div>
+		<div class='title'><span class='iota'>${state} ${party} ${raceType}</span></div>
 	</div>
 
 	<div class='results ${party}'>
@@ -69,7 +78,7 @@ export default function stateResultsSmallTable(results) {
 
 	<div class='precincts-and-more'>
 		<div class='precincts'><span class='iota'>${stateRU.precinctsReportingPct}% <span class='extra'>precincts</span> reporting</span></div>
-		<div class='more'><a href='' class='theta'>See all <span class='extra'>results</span></a></div>
+		<div class='more'><a href='${moreUrl}' class='theta'>See all <span class='extra'>results</span></a></div>
 	</div>
 
 	`;

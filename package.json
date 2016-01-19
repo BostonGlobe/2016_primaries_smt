@@ -37,6 +37,7 @@
     "get-json-lite": "^1.0.0",
     "globe-iframe-resizer": "0.0.2",
     "periodic.js": "^1.0.7",
-    "query-string": "^3.0.0"
+    "query-string": "^3.0.0",
+    "underscore.string": "^3.2.3"
   }
 }
