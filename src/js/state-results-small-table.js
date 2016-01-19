@@ -47,7 +47,7 @@ export default function stateResultsSmallTable(results) {
 	// get state-level reporting unit
 	const stateRU = results.reportingUnits.filter(x => x.level === 'state')[0];
 
-	// sort candidates by ballot number and vote count
+	// sort candidates by vote count
 	const candidates = stateRU.candidates.sort((a, b) => b.voteCount - a.voteCount);
 
 	// get the total vote count

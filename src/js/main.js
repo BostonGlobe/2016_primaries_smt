@@ -9,7 +9,7 @@ import getJSON from 'get-json-lite';
 function onPymParentResize(width) {};
 globeIframe(onPymParentResize);
 
-function getURL(opts) {
+function getURL() {
 
 	const base = {
 		local: 'http://localhost:3010/',
