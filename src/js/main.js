@@ -26,7 +26,7 @@ function getURL() {
 // set up polling
 const displaySelector = '.updater span';
 PeriodicJS({
-	duration: 60*1000,
+	duration: 15*1000,
 	displaySelector,
 	callback: fetchData,
 	runImmediately: true
