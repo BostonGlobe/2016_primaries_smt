@@ -44,6 +44,8 @@ function fetchData(done) {
 
 		const results = json.races[0];
 
+		document.querySelector('.test-status span').innerHTML = results.test ? 'AP TEST DATA' : '';
+
 		// update html components
 		document.querySelector('.state-results-small-table').innerHTML = stateResultsSmallTable(results);
 
