@@ -4,6 +4,7 @@ import stateResultsSmallTable from './state-results-small-table';
 import PeriodicJS from 'periodic.js';
 import { parse } from 'query-string';
 import getJSON from 'get-json-lite';
+import urlManager from './urlManager';
 
 // This fires when the parent of iframe resizes
 function onPymParentResize(width) {};
@@ -11,21 +12,15 @@ globeIframe(onPymParentResize);
 
 function getURL() {
 
-	const base = {
-		local: 'http://localhost:3010/',
-		dev: 'http://dev.apps.bostonglobe.com/graphics/2016/02/state-results-small-table/assets/data/'
-	};
-
-	const baseUrl = location.hostname === 'localhost' ? base.local : base.dev;
-
 	const { state, party, raceType } = parse(location.search);
 
 	const stateAbbr    = Standardize.collapse.state(state);
 	const partyAbbr    = Standardize.collapse.party(party);
 	const raceTypeName = Standardize.raceType(raceType, true);
 
-	const fullUrl = `${baseUrl}${stateAbbr}-${partyAbbr}-${raceTypeName}.json`.toLowerCase();
-	return fullUrl;
+	const url = urlManager({ stateAbbr, partyAbbr, level: 'state' });
+
+	return url;
 }
 
 // set up polling
@@ -47,13 +42,15 @@ function fetchData(done) {
 
 	getJSON(url, function(json) {
 
+		const results = json.races[0];
+
 		// update html components
-		document.querySelector('.state-results-small-table').innerHTML = stateResultsSmallTable(json);
+		document.querySelector('.state-results-small-table').innerHTML = stateResultsSmallTable(results);
 
 		// if we have less than 100% precincts reporting, continue
 
 		// get state-level reporting unit
-		const stateRU = json.reportingUnits.filter(x => x.level === 'state')[0];
+		const stateRU = results.reportingUnits.filter(x => x.level === 'state')[0];
 
 		if (stateRU.precinctsReportingPct < 100) {
 			done();
