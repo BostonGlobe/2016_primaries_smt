@@ -11,7 +11,8 @@ module.exports = function urlManager(opts) {
 
 	// construct the api url
 	// const baseUrl = 'http://dev.tomcat.boston.com/electionapi/elections/';
-	const baseUrl = 'http://devweb.bostonglobe.com/electionapi/elections/';
+	// const baseUrl = 'http://devweb.bostonglobe.com/electionapi/elections/';
+	const baseUrl = 'http://qaweb.bostonglobe.com/electionapi/elections/';
 	const url     = `${baseUrl}${date}?statePostal=${stateAbbr}&party=${partyAbbr}&level=${level}`;
 
 	return url;
