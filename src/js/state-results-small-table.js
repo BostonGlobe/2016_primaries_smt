@@ -1,6 +1,7 @@
 import addCommas from 'add-commas';
 import { Standardize } from 'election-utils';
 import slugify from 'underscore.string/slugify';
+import orderBy from 'lodash.orderby';
 
 const NUMBER_TO_PRIORITIZE = 3;
 const MAX_NUMBER_TO_DISPLAY = 6;
@@ -48,8 +49,8 @@ export default function stateResultsSmallTable(results) {
 	// get state-level reporting unit
 	const stateRU = results.reportingUnits.filter(x => x.level === 'state')[0];
 
-	// sort candidates by vote count
-	const candidates = stateRU.candidates.sort((a, b) => b.voteCount - a.voteCount);
+	// sort candidates by vote count and ballot order
+	const candidates = orderBy(stateRU.candidates, ['voteCount', 'ballotOrder'], ['desc', 'asc']);
 
 	// get the total vote count
 	const totalVoteCount = candidates

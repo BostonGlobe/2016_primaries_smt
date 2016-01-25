@@ -36,6 +36,7 @@
     "election-utils": "^1.0.2",
     "get-json-lite": "^1.0.0",
     "globe-iframe-resizer": "0.0.2",
+    "lodash.orderby": "^4.0.0",
     "periodic.js": "^1.0.7",
     "query-string": "^3.0.0",
     "underscore.string": "^3.2.3"
