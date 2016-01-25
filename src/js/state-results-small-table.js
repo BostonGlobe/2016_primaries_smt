@@ -15,13 +15,12 @@ function candidateRow(candidate, index, totalVoteCount) {
 	const displayPct = Standardize.percent(percent);
 	const winnerTag  = candidate.winner === 'X' ? '<span class="winner">✔</span>' : '';
 
-
 	const fancy = `
 	<div class='candidate-row fancy'>
 		<div class='photo'><img alt='' src='assets/img/${index % 5}.png' /></div>
 		<div class='two-rows'>
 			<div class='name-and-pct'>
-				<div class='name'><span class='first epsilon'>${first}</span> <span class='last epsilon'>${last}</span></div>
+				<div class='name'>${winnerTag}<span class='first epsilon'>${first}</span> <span class='last epsilon'>${last}</span></div>
 				<div class='pct'><span class='epsilon'>${displayPct}%</span></div>
 			</div>
 			<div class='bar-and-votes'>
