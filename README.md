@@ -15,7 +15,17 @@ We're going to create a table for the Iowa Democratic caucuses. Create a new *.j
 
 ```html
 <!-- MODIFY: the id field in the following line-->
-<div id='bg-primaries-smt-caucuses-democratic-iowa' style='margin: 20px 0;'></div>
+<div class='election-results-wrapper'>
+
+	<div id='bg-primaries-smt-caucuses-democratic-iowa' style='margin: 20px 0;'></div>
+	<div class='see-all-election-results'><a href='https://dev.apps.bostonglobe.com/election-results/2016/caucuses/republican/iowa/'>See all results</a></div>
+
+</div>
+
+<style>
+	.election-results-wrapper { position: relative; }
+	.see-all-election-results { position: absolute: bottom: 9px; right: 0; font-family: Helvetica, Arial, sans-serif; font-size: 13px; }
+</style>
 
 <script src='https://apps.bostonglobe.com/common/js/pym/pym-0.4.5.min.js'></script>
 <script>
