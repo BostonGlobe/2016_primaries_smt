@@ -20,7 +20,7 @@ We're going to create a table for the Iowa Democratic caucuses. Create a new *.j
     <div id='bg-primaries-smt-caucuses-democratic-iowa' style='margin: 0;'></div>
 
     <!-- MODIFY: the url in the link-->
-    <div class='see-all-election-results'><a href='http://dev.apps.bostonglobe.com/election-results/2016/caucuses/democratic/iowa/'>See all results</a></div>
+    <div class='see-all-election-results'><a href='https://apps.bostonglobe.com/election-results/2016/caucuses/democratic/iowa/'>See all results</a></div>
 
 </div>
 
@@ -41,7 +41,7 @@ We're going to create a table for the Iowa Democratic caucuses. Create a new *.j
     // MODIFY: make sure this is the same as the id field in the first line
     var uniqueId  = 'bg-primaries-smt-caucuses-democratic-iowa';
 
-    var baseurl   = 'http://dev.apps.bostonglobe.com/graphics/2016/02/state-results-small-table';
+    var baseurl   = 'https://apps.bostonglobe.com/graphics/2016/02/state-results-small-table';
     var url       = [baseurl, '?raceType=', raceType, '&party=', party, '&state=', state].join('');
     var pymParent = new pym.Parent(uniqueId, url, {});
 </script>
