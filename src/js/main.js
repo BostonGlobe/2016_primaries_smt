@@ -32,7 +32,7 @@ PeriodicJS({
 	runImmediately: true
 });
 
-function fetchData(done) {
+function fetchData(resume) {
 
 	// tell user we are fetching data
 	const element = document.querySelector(displaySelector);
@@ -49,16 +49,26 @@ function fetchData(done) {
 		// update html components
 		document.querySelector('.state-results-small-table').innerHTML = stateResultsSmallTable(results);
 
-		// if we have less than 100% precincts reporting, continue
-
 		// get state-level reporting unit
 		const stateRU = results.reportingUnits.filter(x => x.level === 'state')[0];
 
+		// if we have less than 100% precincts reporting, continue
 		if (stateRU.precinctsReportingPct < 100) {
-			done();
-		} else {
+
+			// continue clock
+			resume();
+
+		}
+		// else clear the updater and don't call periodicjs again
+		else {
+
 			element.innerHTML = '';
 		}
+
+	}, function(error) {
+
+		// continue clock
+		resume();
 
 	});
 
