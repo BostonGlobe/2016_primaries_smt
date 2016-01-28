@@ -2,11 +2,12 @@ import addCommas from 'add-commas';
 import { Standardize } from 'election-utils';
 import slugify from 'underscore.string/slugify';
 import orderBy from 'lodash.orderby';
+import candidatesToShow from './candidates';
 
 const NUMBER_TO_PRIORITIZE = 3;
 const MAX_NUMBER_TO_DISPLAY = 6;
 
-function candidateRow(candidate, index, totalVoteCount) {
+function candidateRow(candidate, index, totalVoteCount, party) {
 
 	const first      = candidate.hasOwnProperty('first') ? candidate.first : '';
 	const last       = candidate.hasOwnProperty('last') ? candidate.last : '';
@@ -15,9 +16,13 @@ function candidateRow(candidate, index, totalVoteCount) {
 	const displayPct = Standardize.percent(percent);
 	const winnerTag  = candidate.winner === 'X' ? '<span class="winner">✔</span>' : '';
 
+	const image = candidatesToShow[party.toLowerCase()].indexOf(last.toLowerCase()) > -1
+		? `${last.toLowerCase()}.jpg`
+		: 'placeholder.png';
+
 	const fancy = `
 	<div class='candidate-row fancy'>
-		<div class='photo'><img alt='' src='assets/img/${index % 5}.png' /></div>
+		<div class='photo'><img alt='' src='assets/img/${image}' /></div>
 		<div class='two-rows'>
 			<div class='name-and-pct'>
 				<div class='name'>${winnerTag}<span class='first epsilon'>${first}</span> <span class='last epsilon'>${last}</span></div>
@@ -73,7 +78,7 @@ export default function stateResultsSmallTable(results) {
 	</div>
 
 	<div class='results ${party}'>
-		${candidates.slice(0, MAX_NUMBER_TO_DISPLAY).map((x, i) => candidateRow(x, i, totalVoteCount)).join('')}
+		${candidates.slice(0, MAX_NUMBER_TO_DISPLAY).map((x, i) => candidateRow(x, i, totalVoteCount, party)).join('')}
 	</div>
 
 	<div class='precincts-and-more'>
