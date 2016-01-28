@@ -22,7 +22,7 @@ function candidateRow(candidate, index, totalVoteCount, party) {
 
 	const fancy = `
 	<div class='candidate-row fancy'>
-		<div class='photo'><img alt='' src='assets/img/${image}' /></div>
+		<div class='photo'><img alt='' src="assets/img/${image}" /></div>
 		<div class='two-rows'>
 			<div class='name-and-pct'>
 				<div class='name'>${winnerTag}<span class='first epsilon'>${first}</span> <span class='last epsilon'>${last}</span></div>
