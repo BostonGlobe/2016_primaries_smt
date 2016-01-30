@@ -53,7 +53,7 @@ function fetchData(resume) {
 		const stateRU = results.reportingUnits.filter(x => x.level === 'state')[0];
 
 		// if we have less than 100% precincts reporting, continue
-		if (stateRU.precinctsReportingPct < 100) {
+		if (+stateRU.precinctsReportingPct < 100) {
 
 			// continue clock
 			resume();
