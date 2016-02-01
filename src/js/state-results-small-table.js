@@ -69,8 +69,6 @@ export default function stateResultsSmallTable(results) {
 
 	const raceType = Standardize.raceType(results.raceType);
 
-	const moreUrl = `https://dev.apps.bostonglobe.com/election-results/2016/${raceType.toLowerCase()}/${party.toLowerCase()}/${slugify(state).toLowerCase()}/`;
-
 	return `
 
 	<div class='title-and-updater ${party}'>
