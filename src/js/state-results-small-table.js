@@ -17,7 +17,7 @@ function candidateRow(candidate, index, totalVoteCount, party) {
 	const winnerTag  = candidate.winner === 'X' ? '<span class="winner">✔</span>' : '';
 
 	const image = candidatesToShow[party.toLowerCase()].indexOf(last.toLowerCase()) > -1
-		? `${last.toLowerCase()}.jpg`
+		? `${last.toLowerCase().replace("'", "")}.jpg`
 		: 'placeholder.png';
 
 	const fancy = `
