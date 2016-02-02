@@ -20,6 +20,9 @@ function candidateRow(candidate, index, totalVoteCount, party) {
 		? `${last.toLowerCase().replace("'", "")}.jpg`
 		: 'placeholder.png';
 
+	const votesSuffix = index === 0 && party.toLowerCase() === 'democratic' ?
+		' <span class="sdes-suffix">*</span>' : '';
+
 	const fancy = `
 	<div class='candidate-row fancy'>
 		<div class='photo'><img alt='' src="assets/img/${image}" /></div>
@@ -30,7 +33,7 @@ function candidateRow(candidate, index, totalVoteCount, party) {
 			</div>
 			<div class='bar-and-votes'>
 				<div class='bar'><span class='iota wrapper'><span style='width: ${displayPct}%'>&nbsp;</span></span></div>
-				<div class='votes'><span class='iota'>${addCommas(voteCount)} votes</span></div>
+				<div class='votes'><span class='iota'>${addCommas(voteCount)} votes</span>${votesSuffix}</div>
 			</div>
 		</div>
 	</div>
@@ -69,6 +72,8 @@ export default function stateResultsSmallTable(results) {
 
 	const raceType = Standardize.raceType(results.raceType);
 
+	const sdes = party === 'Democratic' ? '<div class="sde-explainer">* Delegates estimated by AP</div>' : '';
+
 	return `
 
 	<div class='title-and-updater ${party}'>
@@ -78,6 +83,8 @@ export default function stateResultsSmallTable(results) {
 	<div class='results ${party}'>
 		${candidates.slice(0, MAX_NUMBER_TO_DISPLAY).map((x, i) => candidateRow(x, i, totalVoteCount, party)).join('')}
 	</div>
+
+	${sdes}
 
 	<div class='precincts-and-more'>
 		<div class='precincts'><span class='iota'>${+stateRU.precinctsReportingPct}% <span class='extra'>precincts</span> reporting</span></div>
