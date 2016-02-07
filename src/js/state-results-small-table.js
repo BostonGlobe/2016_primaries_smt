@@ -1,5 +1,5 @@
 import addCommas from 'add-commas';
-import { Standardize } from 'election-utils';
+import { Standardize, IsWinner } from 'election-utils';
 import slugify from 'underscore.string/slugify';
 import orderBy from 'lodash.orderby';
 import candidatesToShow from './candidates';
@@ -14,7 +14,8 @@ function candidateRow(candidate, index, totalVoteCount, party) {
 	const voteCount  = candidate.hasOwnProperty('voteCount') ? candidate.voteCount : 0;
 	const percent    = totalVoteCount > 0 ? candidate.voteCount/totalVoteCount : 0;
 	const displayPct = Standardize.percent(percent);
-	const winnerTag  = candidate.winner === 'X' ? '<span class="winner">✔</span>' : '';
+
+	const winnerTag  = IsWinner(candidate) ? '<span class="winner">✔</span>' : '';
 
 	const image = candidatesToShow[party.toLowerCase()].indexOf(last.toLowerCase()) > -1
 		? `${last.toLowerCase().replace("'", "")}.jpg`
