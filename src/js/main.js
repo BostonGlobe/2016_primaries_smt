@@ -10,9 +10,11 @@ import urlManager from './urlManager';
 function onPymParentResize(width) {};
 globeIframe(onPymParentResize);
 
-function getURL() {
+function getQueryParams() {
+	return parse(location.search);
+}
 
-	const { state, party, raceType } = parse(location.search);
+function getURL({state, party, raceType}) {
 
 	const stateAbbr    = Standardize.collapse.state(state);
 	const partyAbbr    = Standardize.collapse.party(party);
@@ -38,7 +40,11 @@ function fetchData(resume) {
 	const element = document.querySelector(displaySelector);
 	element.innerHTML = 'updating';
 
-	const url = getURL();
+	const { state, party, raceType } = getQueryParams();
+	const url = getURL({state, party, raceType});
+
+	const NUMBER_TO_PRIORITIZE = party.toLowerCase() === 'democratic' ? 2 : 3;
+	const MAX_NUMBER_TO_DISPLAY = party.toLowerCase() === 'democratic' ? 2 : 6;
 
 	getJSON(url, function(json) {
 
@@ -49,7 +55,7 @@ function fetchData(resume) {
 			: '';
 
 		// update html components
-		document.querySelector('.state-results-small-table').innerHTML = stateResultsSmallTable(results);
+		document.querySelector('.state-results-small-table').innerHTML = stateResultsSmallTable({results, NUMBER_TO_PRIORITIZE, MAX_NUMBER_TO_DISPLAY});
 
 		// get state-level reporting unit
 		const stateRU = results.reportingUnits.filter(x => x.level === 'state')[0];

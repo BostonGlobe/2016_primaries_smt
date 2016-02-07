@@ -4,10 +4,7 @@ import slugify from 'underscore.string/slugify';
 import orderBy from 'lodash.orderby';
 import candidatesToShow from './candidates';
 
-const NUMBER_TO_PRIORITIZE = 3;
-const MAX_NUMBER_TO_DISPLAY = 6;
-
-function candidateRow(candidate, index, totalVoteCount, party) {
+function candidateRow(candidate, index, totalVoteCount, party, NUMBER_TO_PRIORITIZE) {
 
 	const first      = candidate.hasOwnProperty('first') ? candidate.first : '';
 	const last       = candidate.hasOwnProperty('last') ? candidate.last : '';
@@ -21,9 +18,6 @@ function candidateRow(candidate, index, totalVoteCount, party) {
 		? `${last.toLowerCase().replace("'", "")}.jpg`
 		: 'placeholder.png';
 
-	const votesSuffix = index === 0 && party.toLowerCase() === 'democratic' ?
-		' <span class="sdes-suffix">*</span>' : '';
-
 	const fancy = `
 	<div class='candidate-row fancy'>
 		<div class='photo'><img alt='' src="assets/img/${image}" /></div>
@@ -34,7 +28,7 @@ function candidateRow(candidate, index, totalVoteCount, party) {
 			</div>
 			<div class='bar-and-votes'>
 				<div class='bar'><span class='iota wrapper'><span style='width: ${displayPct}%'>&nbsp;</span></span></div>
-				<div class='votes'><span class='iota'>${addCommas(voteCount)} votes</span>${votesSuffix}</div>
+				<div class='votes'><span class='iota'>${addCommas(voteCount)} votes</span></div>
 			</div>
 		</div>
 	</div>
@@ -52,7 +46,7 @@ function candidateRow(candidate, index, totalVoteCount, party) {
 
 }
 
-export default function stateResultsSmallTable(results) {
+export default function stateResultsSmallTable({results, NUMBER_TO_PRIORITIZE, MAX_NUMBER_TO_DISPLAY}) {
 
 	// get state-level reporting unit
 	const stateRU = results.reportingUnits.filter(x => x.level === 'state')[0];
@@ -73,7 +67,7 @@ export default function stateResultsSmallTable(results) {
 
 	const raceType = Standardize.raceType(results.raceType);
 
-	const sdes = party === 'Democratic' ? '<div class="sde-explainer">* Delegates estimated by AP</div>' : '';
+	const sdes = party === 'Democratic' ? '<div class="sde-explainer">NOTE: Delegates estimated by AP</div>' : '';
 
 	return `
 
@@ -82,7 +76,7 @@ export default function stateResultsSmallTable(results) {
 	</div>
 
 	<div class='results ${party}'>
-		${candidates.slice(0, MAX_NUMBER_TO_DISPLAY).map((x, i) => candidateRow(x, i, totalVoteCount, party)).join('')}
+		${candidates.slice(0, MAX_NUMBER_TO_DISPLAY).map((x, i) => candidateRow(x, i, totalVoteCount, party, NUMBER_TO_PRIORITIZE)).join('')}
 	</div>
 
 	${sdes}
