@@ -51,7 +51,7 @@ function fetchData(resume) {
 		const results = json.races[0];
 
 		document.querySelector('.test-wrapper').innerHTML = results.test
-			? "<div class='test-status'><span class='beta'></span></div>"
+			? "<div class='test-status'><span class='beta'>AP TEST DATA</span></div>"
 			: '';
 
 		// update html components
