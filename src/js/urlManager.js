@@ -10,10 +10,10 @@ module.exports = function urlManager(opts) {
 	const date = RaceDates[`${stateAbbr}-${partyAbbr}`.toLowerCase()];
 
 	// construct the api url
-	// const baseUrl = 'http://dev.tomcat.boston.com/electionapi/elections/';
-	const baseUrl = 'http://devweb.bostonglobe.com/electionapi/elections/';
-	// const baseUrl = 'http://devweb.bostonglobe.com/electionapi/elections/';
-	// const baseUrl = 'https://www.bostonglobe.com/electionapi/elections/';
+	// const baseUrl = '//dev.apps.bostonglobe.com/electionapi/elections/';
+	// const baseUrl = '//qaweb.bostonglobe.com/electionapi/elections/';
+	const baseUrl = '//www.bostonglobe.com/electionapi/elections/';
+
 	const url     = `${baseUrl}${date}?statePostal=${stateAbbr}&party=${partyAbbr}&level=${level}`;
 
 	return url;
