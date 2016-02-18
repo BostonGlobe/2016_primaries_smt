@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "prod": "gulp prod && cat dist/prod/index.html | pbcopy"
+  },
   "devDependencies": {
     "browser-sync": "^2.11.0",
     "chalk": "^1.1.1",
