@@ -56,4 +56,4 @@ Slot the *.jpt* in your article or section front and you're done.
 #### Setup
 
 - `npm i`
-
+- `gulp prod && cat dist/prod/index.html | pbcopy`
