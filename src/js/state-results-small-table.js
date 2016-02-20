@@ -79,6 +79,8 @@ export default function stateResultsSmallTable({results, NUMBER_TO_PRIORITIZE, M
 		${candidates.slice(0, MAX_NUMBER_TO_DISPLAY).map((x, i) => candidateRow(x, i, totalVoteCount, party, NUMBER_TO_PRIORITIZE)).join('')}
 	</div>
 
+	${sdes}
+
 	<div class='precincts-and-more'>
 		<div class='precincts'><span class='iota'>${+stateRU.precinctsReportingPct}% <span class='extra'>precincts</span> reporting</span></div>
 	</div>
