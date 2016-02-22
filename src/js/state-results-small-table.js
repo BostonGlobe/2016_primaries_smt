@@ -1,5 +1,5 @@
 import addCommas from 'add-commas';
-import { Standardize, IsWinner } from 'election-utils';
+import { standardize, Candidate } from 'election-utils';
 import slugify from 'underscore.string/slugify';
 import orderBy from 'lodash.orderby';
 import candidatesToShow from './candidates';
@@ -10,9 +10,9 @@ function candidateRow(candidate, index, totalVoteCount, party, NUMBER_TO_PRIORIT
 	const last       = candidate.hasOwnProperty('last') ? candidate.last : '';
 	const voteCount  = candidate.hasOwnProperty('voteCount') ? candidate.voteCount : 0;
 	const percent    = totalVoteCount > 0 ? candidate.voteCount/totalVoteCount : 0;
-	const displayPct = Standardize.percent(percent);
+	const displayPct = standardize.percent(percent);
 
-	const winnerTag  = IsWinner(candidate) ? '<span class="winner">✔</span>' : '';
+	const winnerTag  = Candidate.isWinner(candidate) ? '<span class="winner">✔</span>' : '';
 
 	const image = candidatesToShow[party.toLowerCase()].indexOf(last.toLowerCase()) > -1
 		? `${last.toLowerCase().replace("'", "")}.jpg`
@@ -60,12 +60,12 @@ export default function stateResultsSmallTable({results, NUMBER_TO_PRIORITIZE, M
 		.reduce((x, y) => x + y);
 
 	const partyAbbr = results.party;
-	const party = Standardize.expand.party(partyAbbr);
+	const party = standardize.expandParty(partyAbbr);
 
 	const stateAbbr = stateRU.statePostal;
-	const state = Standardize.expand.state(stateAbbr);
+	const state = standardize.expandState(stateAbbr);
 
-	const raceType = Standardize.raceType(results.raceType);
+	const raceType = standardize.raceType(results.raceType);
 
 	const sdes = party === 'Democratic' ? '<div class="sde-explainer">NOTE: Delegates estimated by AP</div>' : '';
 
