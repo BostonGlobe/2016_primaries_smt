@@ -1,6 +1,6 @@
 import { primaries2016Dates, standardize} from 'election-utils';
 
-module.exports = function urlManager(opts) {
+export default function urlManager(opts) {
 
 	const stateAbbr = opts.stateAbbr;
 	const partyAbbr = opts.partyAbbr;
