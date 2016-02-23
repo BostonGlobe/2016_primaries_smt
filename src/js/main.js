@@ -1,5 +1,5 @@
 import globeIframe from 'globe-iframe-resizer';
-import { Standardize } from 'election-utils';
+import { standardize } from 'election-utils';
 import stateResultsSmallTable from './state-results-small-table';
 import PeriodicJS from 'periodic.js';
 import { parse } from 'query-string';
@@ -16,9 +16,9 @@ function getQueryParams() {
 
 function getURL({state, party, raceType}) {
 
-	const stateAbbr    = Standardize.collapse.state(state);
-	const partyAbbr    = Standardize.collapse.party(party);
-	const raceTypeName = Standardize.raceType(raceType, true);
+	const stateAbbr    = standardize.collapseState(state);
+	const partyAbbr    = standardize.collapseParty(party);
+	const raceTypeName = standardize.raceType(raceType, true);
 
 	const url = urlManager({ stateAbbr, partyAbbr, level: 'state' });
 
