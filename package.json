@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "add-commas": "github:gabrielflorit/add-commas",
-    "election-utils": "^3.0.11",
+    "election-utils": "^3.1.0",
     "get-json-lite": "^1.0.0",
     "globe-iframe-resizer": "0.0.2",
     "lodash.orderby": "^4.0.0",

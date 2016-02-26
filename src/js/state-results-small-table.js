@@ -1,5 +1,5 @@
 import addCommas from 'add-commas';
-import { standardize, Candidate, primaries2016Candidates } from 'election-utils';
+import { standardize, Candidate, primaries2016Candidates, primaries2016Dates } from 'election-utils';
 import slugify from 'underscore.string/slugify';
 import orderBy from 'lodash.orderby';
 
@@ -80,7 +80,13 @@ export default function stateResultsSmallTable({results, NUMBER_TO_PRIORITIZE, M
 
 	const raceType = standardize.raceType(results.raceType);
 
-	const sdes = party === 'Democratic' ? '<div class="sde-explainer">NOTE: Delegates estimated by AP</div>' : '';
+	const raceInfo = primaries2016Dates.find(d => {
+		const sameState = d.stateAbbr === stateAbbr.toUpperCase();
+		const sameParty = d.party.toLowerCase() === party.toLowerCase();
+		return sameState && sameParty;
+	});
+
+	const note = raceInfo.resultsNote ? `<div class="results-note">Note: ${raceInfo.resultsNote}</div>` : '';
 
 	return `
 
@@ -92,7 +98,7 @@ export default function stateResultsSmallTable({results, NUMBER_TO_PRIORITIZE, M
 		${candidates.slice(0, MAX_NUMBER_TO_DISPLAY).map((x, i) => candidateRow(x, i, totalVoteCount, party, NUMBER_TO_PRIORITIZE)).join('')}
 	</div>
 
-	${sdes}
+	${note}
 
 	<div class='precincts-and-more'>
 		<div class='precincts'><span class='iota'>${+stateRU.precinctsReportingPct}% <span class='extra'>precincts</span> reporting</span></div>
