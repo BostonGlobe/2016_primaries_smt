@@ -1,8 +1,7 @@
 import addCommas from 'add-commas';
-import { standardize, Candidate } from 'election-utils';
+import { standardize, Candidate, primaries2016Candidates } from 'election-utils';
 import slugify from 'underscore.string/slugify';
 import orderBy from 'lodash.orderby';
-import candidatesToShow from './candidates';
 
 function candidateRow(candidate, index, totalVoteCount, party, NUMBER_TO_PRIORITIZE) {
 
@@ -14,7 +13,7 @@ function candidateRow(candidate, index, totalVoteCount, party, NUMBER_TO_PRIORIT
 
 	const winnerTag  = Candidate.isWinner(candidate) ? '<span class="winner">✔</span>' : '';
 
-	const image = candidatesToShow[party.toLowerCase()].indexOf(last.toLowerCase()) > -1
+	const image = primaries2016Candidates.find(c => c.last === last.toLowerCase())
 		? `${last.toLowerCase().replace("'", "")}.jpg`
 		: 'placeholder.png';
 
@@ -47,12 +46,26 @@ function candidateRow(candidate, index, totalVoteCount, party, NUMBER_TO_PRIORIT
 }
 
 export default function stateResultsSmallTable({results, NUMBER_TO_PRIORITIZE, MAX_NUMBER_TO_DISPLAY}) {
-
 	// get state-level reporting unit
 	const stateRU = results.reportingUnits.filter(x => x.level === 'state')[0];
 
+	// filter out not real candidates
+	const filtered = stateRU.candidates.filter(c => {
+		return primaries2016Candidates.find(c1 => c1.last === c.last.toLowerCase());
+	});
+
+	const withSuspended = filtered.map(c1 => {
+		const c2 = primaries2016Candidates.find(c3 => c3.last === c1.last.toLowerCase());
+		const active = c2.suspendedDate ? 0 : 1;
+		c1.active = active;
+		return c1;
+	});
+
+	withSuspended.sort((a,b) => a.ballotOrder - b.ballotOrder);
+	withSuspended.sort((a,b) => b.active - a.active);
+
 	// sort candidates by vote count and ballot order
-	const candidates = orderBy(stateRU.candidates, ['voteCount', 'ballotOrder'], ['desc', 'asc']);
+	const candidates = orderBy(withSuspended, ['voteCount'], ['desc']);
 
 	// get the total vote count
 	const totalVoteCount = candidates

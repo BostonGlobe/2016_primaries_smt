@@ -1,5 +1,5 @@
 import globeIframe from 'globe-iframe-resizer';
-import { standardize } from 'election-utils';
+import { standardize, primaries2016Candidates } from 'election-utils';
 import stateResultsSmallTable from './state-results-small-table';
 import PeriodicJS from 'periodic.js';
 import { parse } from 'query-string';
@@ -43,8 +43,14 @@ function fetchData(resume) {
 	const { state, party, raceType } = getQueryParams();
 	const url = getURL({state, party, raceType});
 
+	const numGOP = primaries2016Candidates.reduce((count, item) => {
+		count += item.suspendedDate ? 0 : 1;
+		return count;
+	}, 0);
+
+	
 	const NUMBER_TO_PRIORITIZE = party.toLowerCase() === 'democratic' ? 2 : 3;
-	const MAX_NUMBER_TO_DISPLAY = party.toLowerCase() === 'democratic' ? 2 : 6;
+	const MAX_NUMBER_TO_DISPLAY = party.toLowerCase() === 'democratic' ? 2 : Math.min(5, numGOP);
 
 	getJSON(url, function(json) {
 
