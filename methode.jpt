@@ -3,15 +3,18 @@
 
 <div class='story election-results-wrapper'>
 
-	<!-- -------------------------- -->
-    <!-- MODIFY: the id             -->
-	<!-- -------------------------- -->
-	<div id='${storyID}-nh-dem' class='globe-graphic-iframe' style='margin: 0;'></div>
+	<!-- ---------------------------------- -->
+    <!-- 1. MODIFY: the id (use state abbr) -->
+	<!-- ---------------------------------- -->
+	<div id='${storyID}-al-dem' class='globe-graphic-iframe' style='margin: 0;'></div>
 
-	<!-- -------------------------- -->
-    <!-- MODIFY: the url in the link-->
-	<!-- -------------------------- -->
-    <div class='see-all-election-results'><a href='//dev.apps.bostonglobe.com/election-results/2016/primary/democratic/new-hampshire/?p1=BG_election_results'>See all results</a></div>
+	<!-- -------------------------------- -->
+    <!-- 2. MODIFY: the url in the link   -->
+    <!-- Use "-" for space in state name  -->
+	<!-- -------------------------------- -->
+    <div class='see-all-election-results'>
+    	<a href='//apps.bostonglobe.com/election-results/2016/primary/democratic/alabama/?p1=BG_election_results'>See all results</a>
+	</div>
 
 </div>
 <style>
@@ -26,25 +29,32 @@
 
 
 			//========================================
-			// Insert path to jpt between quotes below
+			// 3. Use the same id as in step 1
 			//========================================
-			var path = '/Boston/Content/Politics/WebGraphics/2016/02/primaryWidgets/nh-dem.jpt';
+			var id = '${storyID}-al-dem';
 
 			//========================================
-			// MODIFY: raceDetails
+			// 4. Path to jpt between quotes below
 			//========================================
-			var raceDetails = '&raceType=primary&party=democratic&state=new hampshire';
+			var path = '/Boston/Content/Politics/WebGraphics/2016/02/primaryWidgets/al-dem.jpt'; 
 
 			//========================================
-			// MODIFY: raceDetails
+			// 5. MODIFY race type, party, and state
+			// INCLUDE spaces in state name
 			//========================================
-			var html = 'nh-index.html';
+			var raceDetails = '&raceType=primary&party=democratic&state=alabama';
+			
+			//========================================
+			// DONE
+			//========================================
+
+			var html = 'march-1-index.html';						
 
 			var test1 = '.jpt';
 			var test2 = '/Boston';
 			var invalid = path.indexOf(test1, path.length - test1.length) === -1 || path.indexOf(test2) !== 0;
 
-			if(invalid) {
+			if(invalid) { 
 				alert('Incorrect path to JPT. Make sure to paste entire path from "/Boston" through ".jpt".');
 				return false;
 			} else {
@@ -66,12 +76,9 @@
 
 		var pymParent;
 		var src = getSource();
-
+		
 		if(src) {
-			//========================================
-			// MODIFY: first argument
-			//========================================
-			pymParent = new pym.Parent('${storyID}-nh-dem', src, {});
+			pymParent = new pym.Parent(id, src, {});
 			pymParent.onMessage('height-request', function(msg) { pymParent.sendMessage('height-send', window.innerHeight); });
 		}
 	})();
