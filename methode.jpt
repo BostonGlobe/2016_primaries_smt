@@ -25,13 +25,12 @@
 <script src='//apps.bostonglobe.com/common/js/pym/pym-0.4.5.min.js' type='text/javascript'></script>
 <script>
     (function() {
+   		//========================================
+		// 3. Use the same id as in step 1
+		//========================================
+		var id = '${storyID}-al-dem';
+			
 		var getSource = function() {
-
-
-			//========================================
-			// 3. Use the same id as in step 1
-			//========================================
-			var id = '${storyID}-al-dem';
 
 			//========================================
 			// 4. Path to jpt between quotes below
