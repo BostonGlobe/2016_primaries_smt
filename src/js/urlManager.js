@@ -5,7 +5,7 @@ export default function urlManager(opts) {
 	const stateAbbr = opts.stateAbbr;
 	const partyAbbr = opts.partyAbbr;
 	const level     = opts.level;
-	const test		= true;
+	const test		= false;
 
 	// get race for this state-party combination
 	const { date } = primaries2016Dates.find(el => el.stateAbbr.toLowerCase() === stateAbbr.toLowerCase() && el.party === standardize.expandParty(partyAbbr));
